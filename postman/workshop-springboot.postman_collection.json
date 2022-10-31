@@ -59,6 +59,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get user API :: Failcase 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check data in response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(404).to.eql(jsonData.header.code);",
+							"    pm.expect(1).to.eql(jsonData.body.id);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"header\": { \"type\": \"object\" },",
+							"    \"body\": { \"type\": \"object\" }",
+							"  },",
+							"  \"required\": [\"header\", \"body\"],",
+							"};",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"100"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
