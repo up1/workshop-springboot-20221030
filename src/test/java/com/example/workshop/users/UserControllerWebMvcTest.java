@@ -1,5 +1,6 @@
 package com.example.workshop.users;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,9 +25,12 @@ public class UserControllerWebMvcTest {
                 this.mvc.perform(get("/users/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
 
-//        UserResponse response = null;
-//        // Assert
-//        assertEquals(200, response.getHeader().getCode());
-//        assertEquals(1, response.getBody().getId());
+        // Convert JSON string to Java Object
+        ObjectMapper mapper = new ObjectMapper();
+        byte[] data = mvcResult.getResponse().getContentAsByteArray();
+        UserResponse response = mapper.readValue(data, UserResponse.class);
+        // Assert
+        assertEquals(200, response.getHeader().getCode());
+        assertEquals(1, response.getBody().getId());
     }
 }
