@@ -4,6 +4,11 @@ public class Header{
 	private int code;
 	private String message;
 
+	public Header(int code, String message) {
+		this.code = code;
+		this.message = message;
+	}
+
 	public void setCode(int code){
 		this.code = code;
 	}

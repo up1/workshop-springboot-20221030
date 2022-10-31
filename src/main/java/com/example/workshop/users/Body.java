@@ -1,9 +1,13 @@
 package com.example.workshop.users;
 
 public class Body{
-	private String firstname;
 	private int id;
+	private String firstname;
 	private String lastname;
+
+	public Body(int id) {
+		this.id = id;
+	}
 
 	public void setFirstname(String firstname){
 		this.firstname = firstname;

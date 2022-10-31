@@ -11,7 +11,12 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public UserResponse getUserById(@PathVariable int id) {
-        return new UserResponse();
+        Header header = new Header(200, "ok");
+        Body body = new Body(id);
+        UserResponse response = new UserResponse();
+        response.setHeader(header);
+        response.setBody(body);
+        return response;
     }
 
     @GetMapping("/users2/{id}")
