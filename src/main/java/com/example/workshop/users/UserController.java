@@ -18,9 +18,15 @@ public class UserController {
  GET /users/<id>
 
  {
-    "id": 1,
-    "firstname": "somkiat",
-    "lastname": "pui"
+ "header": {
+     "code": 200,
+     "message": "OK"
+ },
+ "body": {
+     "id": 1,
+     "firstname": "somkiat",
+     "lastname": "pui"
+ }
  }
 
  */

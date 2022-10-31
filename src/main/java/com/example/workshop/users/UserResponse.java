@@ -1,31 +1,22 @@
 package com.example.workshop.users;
 
 public class UserResponse{
-	private int id;
-	private String firstname;
-	private String lastname;
+	private Header header;
+	private Body body;
 
-	public void setFirstname(String firstname){
-		this.firstname = firstname;
+	public void setHeader(Header header){
+		this.header = header;
 	}
 
-	public String getFirstname(){
-		return firstname;
+	public Header getHeader(){
+		return header;
 	}
 
-	public void setId(int id){
-		this.id = id;
+	public void setBody(Body body){
+		this.body = body;
 	}
 
-	public int getId(){
-		return id;
-	}
-
-	public void setLastname(String lastname){
-		this.lastname = lastname;
-	}
-
-	public String getLastname(){
-		return lastname;
+	public Body getBody(){
+		return body;
 	}
 }
