@@ -1,8 +1,9 @@
 package com.example.workshop.users;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserService {
     public UserResponse getById(int id) {
         if(id <= 10) {
