@@ -18,15 +18,10 @@ public class UserControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @ExceptionHandler(BusinessException.class)
-//    public ResponseEntity<UserResponse> xx(BusinessException e) {
-//        Header header = new Header(404, "ok");
-//        Body body = new Body(e.getId());
-//        UserResponse response = new UserResponse();
-//        response.setHeader(header);
-//        response.setBody(body);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<String> xx(BusinessException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+    }
 
 
 
