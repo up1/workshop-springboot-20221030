@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "bd7ee0a3-a8fc-406b-8c35-edfc5c17124e",
+		"name": "workshop-springboot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1453931"
+	},
+	"item": [
+		{
+			"name": "Get user API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check data in response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(200).to.eql(jsonData.header.code);",
+							"    pm.expect(1).to.eql(jsonData.body.id);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"header\": { \"type\": \"object\" },",
+							"    \"body\": { \"type\": \"object\" }",
+							"  },",
+							"  \"required\": [\"header\", \"body\"],",
+							"};",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
