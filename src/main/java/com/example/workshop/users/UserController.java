@@ -1,5 +1,6 @@
 package com.example.workshop.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/users/{id}")
     public UserResponse getUserById(@PathVariable int id) {
-        if(id <= 10) {
-            Header header = new Header(200, "ok");
-            Body body = new Body(id);
-            UserResponse response = new UserResponse();
-            response.setHeader(header);
-            response.setBody(body);
-            return response;
-        }
-        return new UserResponse();
+        UserResponse response = userService.getById(id);
+        return  response;
     }
 
     @GetMapping("/users2/{id}")
