@@ -1,6 +1,5 @@
 package com.example.workshop.users;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +13,6 @@ public class UserService {
             response.setBody(body);
             return response;
         }
-        return new UserResponse();
+        throw new UserNotFoundException("User id = " + id + " not found");
     }
 }
