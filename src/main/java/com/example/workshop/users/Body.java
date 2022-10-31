@@ -5,6 +5,9 @@ public class Body{
 	private String firstname;
 	private String lastname;
 
+	public Body() {
+	}
+
 	public Body(int id) {
 		this.id = id;
 	}

@@ -4,6 +4,9 @@ public class Header{
 	private int code;
 	private String message;
 
+	public Header() {
+	}
+
 	public Header(int code, String message) {
 		this.code = code;
 		this.message = message;
