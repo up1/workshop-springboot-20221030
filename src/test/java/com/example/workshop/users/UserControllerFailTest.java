@@ -7,10 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UserControllerTest {
+public class UserControllerFailTest {
 
     @Autowired
     private TestRestTemplate template;
@@ -19,19 +19,13 @@ public class UserControllerTest {
     private UserRepository userRepository;
 
     @Test
-    @DisplayName("การทดสอบดึงข้อมูลผู้ใช้งาน ....")
-    public void success_case() {
-        // Arrange
-        MyUser user = new MyUser();
-        user.setId(1);
-        user.setFirstName("Demo");
-        userRepository.save(user);
+    @DisplayName("การทดสอบไม่สามารถดึงข้อมูลผู้ใช้งาน ....")
+    public void fail_case_with_404() {
         // Act
         UserResponse response
-                = template.getForObject("/users/1", UserResponse.class);
+                = template.getForObject("/users/99", UserResponse.class);
         // Assert
-        assertEquals(200, response.getHeader().getCode());
-        assertEquals(1, response.getBody().getId());
+        assertEquals(404, response.getHeader().getCode());
+        assertEquals(99, response.getBody().getId());
     }
-
 }
