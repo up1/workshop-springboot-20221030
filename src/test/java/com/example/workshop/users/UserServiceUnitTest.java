@@ -5,7 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceUnitTest {
@@ -16,6 +19,11 @@ public class UserServiceUnitTest {
     @Test
     public void getById() {
         //Arrange
+        MyUser user = new MyUser();
+        user.setId(1);
+        user.setFirstName("Demo");
+        when(userRepository.findById(1)).thenReturn(Optional.of(user));
+
         UserService userService = new UserService();
         userService.setUserRepository(userRepository);
         // Act
