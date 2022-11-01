@@ -11,6 +11,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public UserResponse getById(int id) {
         Optional<MyUser> result = userRepository.findById(id);
         if(result.isPresent()) {

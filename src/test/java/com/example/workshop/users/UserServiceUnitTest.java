@@ -1,16 +1,26 @@
 package com.example.workshop.users;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserServiceUnitTest {
+
+    @Mock
+    private UserRepository userRepository;
 
     @Test
     public void getById() {
+        //Arrange
         UserService userService = new UserService();
+        userService.setUserRepository(userRepository);
+        // Act
         UserResponse response = userService.getById(1);
+        // Assert
         assertEquals(1, response.getBody().getId());
         assertEquals(200, response.getHeader().getCode());
     }
