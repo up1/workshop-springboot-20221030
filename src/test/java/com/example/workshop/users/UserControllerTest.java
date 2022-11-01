@@ -1,5 +1,7 @@
 package com.example.workshop.users;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,22 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Test
-    @DisplayName("การทดสอบดึงข้อมูลผู้ใช้งาน ....")
-    public void success_case() {
-        // Arrange
+    @BeforeEach
+    public void initDataForTest() {
         MyUser user = new MyUser();
         user.setId(1);
         user.setFirstName("Demo");
         userRepository.save(user);
+    }
+
+    @AfterEach
+    public void clearDataForTest() {
+        userRepository.deleteById(1);
+    }
+
+    @Test
+    @DisplayName("การทดสอบดึงข้อมูลผู้ใช้งาน ....")
+    public void success_case() {
         // Act
         UserResponse response
                 = template.getForObject("/users/1", UserResponse.class);
