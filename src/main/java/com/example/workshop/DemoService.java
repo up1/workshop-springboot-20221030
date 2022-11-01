@@ -3,7 +3,9 @@ package com.example.workshop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.transaction.Transactional;
+class MyOrder {
+
+}
 
 public class DemoService {
 
@@ -12,11 +14,11 @@ public class DemoService {
     @Autowired
     private TransactionTemplate transactionTemplate;
 
-    public void processOrdering(String input){
+    public void processOrdering(MyOrder order){
         transactionTemplate.execute( status -> {
             // 1. Generate a new order in DB
             // 2. Generate a new invoice in DB
-            return "";
+            return order;
         });
         // 3. Call payment gateway => API
         transactionTemplate.execute( status -> {
