@@ -3,6 +3,7 @@ package com.example.workshop.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -15,8 +16,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public UserResponse getById(int id) {
+        userRepository.findById(id);
         Optional<MyUser> result = userRepository.findById(id);
+        // Anti-patterns
+        // Call external service (sync) => slow !!
+        // Call external service (async)
         if(result.isPresent()) {
             Header header = new Header(200, "ok");
             Body body = new Body(id);
