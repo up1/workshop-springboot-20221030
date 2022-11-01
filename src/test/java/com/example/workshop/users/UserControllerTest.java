@@ -25,4 +25,15 @@ public class UserControllerTest {
         assertEquals(200, response.getHeader().getCode());
         assertEquals(1, response.getBody().getId());
     }
+
+    @Test
+    @DisplayName("การทดสอบไม่สามารถดึงข้อมูลผู้ใช้งาน ....")
+    public void fail_case_with_404() {
+        // Act
+        UserResponse response
+                = template.getForObject("/users/99", UserResponse.class);
+        // Assert
+        assertEquals(404, response.getHeader().getCode());
+        assertEquals(99, response.getBody().getId());
+    }
 }
