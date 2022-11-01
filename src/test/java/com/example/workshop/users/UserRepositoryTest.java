@@ -29,4 +29,12 @@ class UserRepositoryTest {
         assertEquals("Demo", result.get().getFirstName());
     }
 
+    @Test
+    public void fail_user_not_found_get_data_from_db() {
+        // Act
+        Optional<MyUser> result =  repository.findById(1);
+        // Assert
+        assertFalse(result.isPresent());
+    }
+
 }
