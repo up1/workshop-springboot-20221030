@@ -1,6 +1,7 @@
 package com.example.workshop.users;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,5 +24,15 @@ public class UserServiceUnitTest {
         }catch (UserNotFoundException e) {
             assertEquals("User id = 100 not found", e.getMessage());
         }
+    }
+
+    @Test
+    public void getByIdWithException_juit5() {
+        UserService userService = new UserService();
+        Exception e = assertThrows(UserNotFoundException.class,
+                () -> {
+                    userService.getById(100);
+                });
+        assertEquals("User id = 100 not found", e.getMessage());
     }
 }
