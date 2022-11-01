@@ -22,6 +22,5 @@ public class TodoGatewayIntegrationTest {
         assertTrue(result.isPresent());
         assertEquals(1, result.get().getId());
         assertEquals("delectus aut autem", result.get().getTitle());
-
     }
 }
