@@ -47,4 +47,24 @@ public class UserControllerWebMvcTest {
         assertEquals(200, response.getHeader().getCode());
         assertEquals(1, response.getBody().getId());
     }
+
+    @Test
+    public void getUserByIdWithUseNotFoundException() throws Exception {
+        // Arrange
+        when(userService.getById(100))
+                .thenThrow(new UserNotFoundException("", 100));
+
+        // Act
+        MvcResult mvcResult =
+                this.mvc.perform(get("/users/100").accept(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk()).andReturn();
+
+        // Convert JSON string to Java Object
+        ObjectMapper mapper = new ObjectMapper();
+        byte[] data = mvcResult.getResponse().getContentAsByteArray();
+        UserResponse response = mapper.readValue(data, UserResponse.class);
+        // Assert
+        assertEquals(404, response.getHeader().getCode());
+        assertEquals(100, response.getBody().getId());
+    }
 }
